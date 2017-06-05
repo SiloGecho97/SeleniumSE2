@@ -7,174 +7,176 @@
 
 package autotest;
 
-import java.io.File;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 /**
  *
  * @author silo
  */
 
-public class Autotest {
-    //System.setProperty("webdriver.chrome.driver", "path to chrome driver");
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        System.out.println("Start autotest..............");
-        //method1();
-        //method3();
-        facebook();
-        //method2();
-        
+
+   
+/*
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
+import static autotest.Autotest.facebook;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import static org.apache.http.client.methods.RequestBuilder.options;
+import static org.apache.http.client.methods.RequestBuilder.options;
+import static org.apache.http.client.methods.RequestBuilder.options;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+/**
+*
+* @author Chala
+*/
+public class Autotest extends JFrame {
     
-        
-    
-    }
-    
-    public static void method3()
-    {
-        System.out.println("Searching..........");
-        
-        WebDriver  driver = new ChromeDriver();
-        
-        driver.get("https://www.google.com");
-        
-        WebElement searchbox = driver.findElement(By.name("q"));
-        
-        searchbox.sendKeys("Addis Ababa Institute");
-        
-        searchbox.click();
-         try
-        {
-            Thread.sleep(2000);
-            
-        }catch(Exception e){
-        
+        JButton btnLogin = new JButton("Login");
+        JPanel panel = new JPanel();
+        JLabel username = new JLabel("Username:");
+        JLabel password = new JLabel("Password:");
+        JTextField txtUsername = new JTextField(15);
+        JPasswordField pass = new JPasswordField(15);
+        Autotest(){
+                super("Login to facebook");
+                setSize(400,300);
+                setLocation(500,280);
+                setResizable(false);
+                
+                panel.setLayout(null);
+                panel.setBackground(Color.LIGHT_GRAY);
+                username.setBounds(80, 65, 100, 20);
+                password.setBounds(80, 110, 100, 20);
+                txtUsername.setBounds(155, 65, 150, 20);
+                pass.setBounds(155, 110, 150, 20);
+                btnLogin.setBounds(160, 180, 80, 20);
+                panel.add(btnLogin);
+                panel.add(username);
+                panel.add(password);
+                panel.add(txtUsername);
+                panel.add(pass);
+                getContentPane().add(panel);
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }
-        
-        searchbox.clear();
-        driver.close();
-    }
-    public static void method2()
-    {
-        System.out.println("naviagating...........");
-        System.setProperty("webdriver.chrome.driver","c:\\chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
-        
-        driver.navigate().to("https:www.yahoo.com");
-        
-        try
-        {
-            Thread.sleep(2000);
-            
-        }catch(Exception e){
-        
-        }
-        driver.navigate().to("https:www.google.com");
-        
-        driver.navigate().refresh();
-        driver.navigate().back();
-        driver.navigate().forward();
-        
-        driver.close();
-        
-        
-    }
-    
-    public static void method1()
-    {
-        System.setProperty("webdriver.chrome.driver","C:\\Users\\silas\\Documents\\NetBeansProjects\\Autotest\\chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
-        
-       
-        driver.get("https://www.google.com");
-        
-        System.out.println("Page Title: "+driver.getTitle());
-        System.out.println("Current Url: "+driver.getCurrentUrl());
-        System.out.println("Length of page: "+driver.getPageSource().toString().length());
-        System.out.println("");
-        
-        try{
-            Thread.sleep(2000);
-        }
-        catch(Exception e){
-        }
-        driver.close();
-    }
-    
-    public static void facebook()
-    {
-        ChromeOptions options = new ChromeOptions();
-        options.addExtensions(new File("C:\\ultra_surf.crx"));
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-        ChromeDriver driver = new ChromeDriver(capabilities);
-        
-        
-        driver.get("https://www.facebook.com");
-        WebElement username = driver.findElement(By.id("email"));
-        WebElement password = driver.findElement(By.id("pass"));
-        WebElement login = driver.findElement(By.id("loginbutton"));
-        //ArrayList<List> a= new ArrayList<List>();
-        
-        //WebElement loglin = driver.findElement(By.id("")).findElement(By.className(""));
-        username.sendKeys("+251931644114");
-        password.sendKeys("silogecho");
-        login.click();
-        
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Autotest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        driver.findElement(By.xpath("//*[@title='Profile']")).click();
-
-        //find your frineds count
-       // String frinedsCount = driver.findElement(By.xpath("//*[@data-tab-key='friends']")).getText().substring(7);
-        int count = 1000;
-
-        //click on frineds tab
-        driver.findElement(By.xpath("//*[@data-tab-key='friends']")).click();
-
-        //find your couurent loaded frineds count and get it in a list
-        List<WebElement> frineds = driver.findElements(By.xpath("//*[@class='fsl fwb fcb']"));
-        int found = frineds.size();
-
-
-        while (found <= count){
-
-            //scroll to the last friend found from the current loaded friend list
-            //Coordinates coordinate = ( frineds.get(found-1)).getCoordinates();
-            //coordinate..onPage();
-            //coordinate.inViewPort();
-            frineds = driver.findElements(By.xpath("//*[@class='fsl fwb fcb']"));
-            found = frineds.size();
-
-            // break and print frined list if the condition found frineds = count of frined list
-            if (found == count){
-                System.out.println(found);
-                System.out.println("---Printing FriendList---");
-                for (int i=0; i<found; i++){
-                System.out.println(frineds.get(i).getText());
+        public static void facebook(String value1,String value2){
+                //ChromeOptions options = new ChromeOptions();
+                
+                System.setProperty("webdriver.chrome.driver", "C:\\Users\\silas\\Documents\\NetBeansProjects\\Autotest\\chromedriver.exe");
+                ChromeOptions options = new ChromeOptions();
+                options.addExtensions(new File("C:\\ultra_surf.crx"));
+                options.addArguments("--disable-notifications");
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+                //ChromeDriver driver = new ChromeDriver(capabilities);
+                WebDriver Wdname = new ChromeDriver(options);
+                Wdname.get("https://www.facebook.com");
+                try{
+                Thread.sleep(2000);
+                }catch(Exception e){
                 }
-                break;
-            }
-
+                WebElement phone = Wdname.findElement(By.id("email"));
+                WebElement password = Wdname.findElement(By.id("pass"));
+                WebElement button = Wdname.findElement(By.id("loginbutton"));
+                phone.sendKeys(value1);
+                password.sendKeys(value2);
+                button.click();
+                try{
+                Thread.sleep(2000);
+                }catch(Exception e){
+                }
+                WebElement profile =Wdname.findElement(By.xpath("//a[@title='Profile']"));
+                profile.click();
+                try
+                {
+                Thread.sleep(2000);
+                }
+                catch(Exception e) {}
+                WebElement friends =Wdname.findElement(By.xpath("//a[@data-tab-key='friends']"));
+                friends.click();
+                try
+                {
+                Thread.sleep(1000);
+                }
+                catch(Exception e){}
+                List<WebElement> friends1 = Wdname.findElements(By.xpath("//div[@class='fsl fwb fcb']/a"));
+                //This is path for the friends in the chat box, but its saying not able to find element
+                System.out.println("Total friends is = " +friends1.size());
+                int newFriends = friends1.size();
+                Actions act = new Actions(Wdname);
+                int oldFriends = 0;
+                while(newFriends != 80){
+                WebElement lastFriend = friends1.get(friends1.size()-1);
+                act.moveToElement(lastFriend).build().perform();
+                try{
+                Thread.sleep(1000);
+                }catch(Exception e){
+                }
+                friends1 = Wdname.findElements(By.xpath("//div[@class='fsl fwb fcb']/a"));
+                newFriends = friends1.size();
+                System.out.println("Total friends is = " +friends1.size());
+                }
+                //This is path for the friends in the chat box, but its saying not able to find element
+                System.out.println("Total friends is = " +friends1.size());
+                PrintWriter pw = null;
+                StringBuilder builder = new StringBuilder();
+                String ColumnNamesList = "Facebook friends name";
+                builder.append(ColumnNamesList +"\n");
+                builder.append("1"+",");
+                for(int i=0;i<friends1.size();i++){
+                try
+                {
+                pw = new PrintWriter(new File("Friends.csv"));
+                }
+                catch (FileNotFoundException e)
+                {
+                e.printStackTrace();
+                }
+                builder.append(friends1.get(i).getText());
+                builder.append('\n');
+                pw.write(builder.toString());
+                }
+                pw.close();
+                //Wdname.close();
         }
-    
-      
-         driver.close();
-        
-    }
-    
-    
-    
+        public static void main(String[] args) {
+
+            try
+            {
+                Autotest sel = new Autotest();
+                sel.setVisible(true);
+                sel.buttonAction();
+                }
+                catch(Exception e){}
+            }
+        public void buttonAction(){
+            btnLogin.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent ae){
+            String value1=txtUsername.getText();
+            String value2=pass.getText();;
+            facebook(value1,value2);
+            //setVisible(false);
+            }
+            });
+        }
 }
