@@ -45,10 +45,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-/**
-*
-* @author Chala
-*/
+
 public class Autotest extends JFrame {
     
         JButton btnLogin = new JButton("Login");
